@@ -9,5 +9,5 @@ def input_product():
             stock = int(input(f"Введіть залишок на складі для {name}: "))
             products[name] = {'Ціна': price, 'Залишок': stock}
         except ValueError:
-            print("Помилка вводу! Ціна має бути числом, залишок — цілим числом.")
+            print("Помилка вводу! Ціна має бути числом, а залишок — цілим числом.")
     return products
