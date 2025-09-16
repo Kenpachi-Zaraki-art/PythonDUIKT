@@ -24,7 +24,7 @@ def main():
     print_product_names(product_names)
 
     # Приклад пошуку товару
-    print("\n=== Пошук товару ===")
+    print("\n=== Пошук  товару ===")
     while True:
         search_name = input("Введіть назву товару для пошуку (або 'stop' для виходу): ")
         if search_name.lower() == "stop":
