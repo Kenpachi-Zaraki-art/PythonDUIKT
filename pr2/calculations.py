@@ -11,4 +11,4 @@ def calculate_discount(product_info):
             new_price = details['Ціна'] - discount
             print(f"Знижка для {product}: {discount:.2f} грн (Нова ціна: {new_price:.2f} грн)")
         else:
-            print(f"Для {product} знижка не застосовується (залишок {details['Залишок']} шт.)")
+            print(f"Для {product} знижка  не застосовується (залишок {details['Залишок']} шт.)")
