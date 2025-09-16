@@ -8,7 +8,7 @@ def find_product_by_name(products, product_name, index=0):
     product_keys = list(products.keys())
 
     if index >= len(product_keys):
-        print("Товар не знайдено.")
+        print("Товар не  знайдено.")
         return
 
     if product_keys[index] == product_name:
