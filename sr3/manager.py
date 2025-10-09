@@ -14,3 +14,7 @@ class Manager(Employee):
 
     def generate_report(self):
         return f"Manager {self._name} manages {self._subordinates} employees."
+
+    def calculate_bonus(self):
+        base_bonus = super().calculate_bonus()
+        return base_bonus + (self._subordinates * Manager.premium_size)
