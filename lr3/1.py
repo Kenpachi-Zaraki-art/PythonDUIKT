@@ -6,3 +6,5 @@ class Person:
 
     def get_info(self):
         return f"Студент: {self.first_name} {self.last_name}, оцінка: {self.grade}"
+    def __del__(self):
+        print(f"Ви отримали стипендію {self.first_name} {self.last_name}!")
