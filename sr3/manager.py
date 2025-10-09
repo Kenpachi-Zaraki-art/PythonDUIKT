@@ -11,3 +11,6 @@ class Manager(Employee):
 
     def set_subordinates(self, count):
         self._subordinates = count
+
+    def generate_report(self):
+        return f"Manager {self._name} manages {self._subordinates} employees."
