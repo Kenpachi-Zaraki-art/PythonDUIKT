@@ -17,3 +17,15 @@ score = Score(canvas)
 catcher = Catcher(canvas, 'blue', score)
 eggs = []
 
+while True:
+
+    if random.randint(1, 100) == 1:
+        eggs.append(Egg(canvas, 'red', score))
+
+    for egg in list(eggs):
+        if egg.draw() == 'hit bottom':
+            eggs.remove(egg)
+
+    catcher.catch(eggs)
+    catcher.draw()
+
