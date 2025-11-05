@@ -27,3 +27,23 @@ class Student:
         @group_number.setter
         def group_number(self, new_group: str):
             self.__group_number = new_group
+
+        # --- Гетери та сетери для додаткових полів ---
+        @property
+        def dob(self) -> str:
+            return self.__dob
+
+        @dob.setter
+        def dob(self, new_dob: str):
+            self.__dob = new_dob
+
+        @property
+        def address(self) -> str:
+            return self.__address
+
+        @address.setter
+        def address(self, new_address: str):
+            self.__address = new_address
+
+        def __str__(self):
+            return f"Студент: {self.pib}, Група: {self.group_number}"
