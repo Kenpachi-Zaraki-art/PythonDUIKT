@@ -131,3 +131,22 @@ class DatabaseManager:
         except sqlite3.Error as e:
             print(f"Помилка отримання даних: {e}")
             return None
+
+    def delete_student(self, student_id: int):
+        """
+        Метод для видалення даних з БД.
+        Завдяки 'ON DELETE CASCADE' при створенні таблиці,
+        оцінки видаляться автоматично разом зі студентом.
+        """
+        try:
+            self.cursor.execute("DELETE FROM students WHERE id = ?", (student_id,))
+            self.conn.commit()
+            print(f"Видалено студента з ID {student_id} та всі його оцінки.")
+        except sqlite3.Error as e:
+            print(f"Помилка видалення студента: {e}")
+
+    def close(self):
+        """Закриває з'єднання з БД."""
+        if self.conn:
+            self.conn.close()
+            print("З'єднання з БД закрито.")
