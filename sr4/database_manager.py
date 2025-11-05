@@ -79,3 +79,55 @@ class DatabaseManager:
             print(f"Додано оцінку для student_id {student_id}: {subject}")
         except sqlite3.Error as e:
             print(f"Помилка додавання оцінки: {e}")
+
+    def update_student(self, student_id: int, new_pib: str = None, new_group: str = None):
+        """
+        Метод для оновлення даних студента.
+        """
+        try:
+            if new_pib:
+                self.cursor.execute("UPDATE students SET pib = ? WHERE id = ?", (new_pib, student_id))
+            if new_group:
+                self.cursor.execute("UPDATE students SET group_number = ? WHERE id = ?", (new_group, student_id))
+            self.conn.commit()
+            print(f"Оновлено дані для student_id {student_id}")
+        except sqlite3.Error as e:
+            print(f"Помилка оновлення студента: {e}")
+
+    def get_student_data_by_id(self, student_id: int) -> dict:
+        """
+        Додатковий метод для читання даних з БД (частина CRUD).
+        """
+        try:
+            # Отримуємо дані студента
+            self.cursor.execute("SELECT * FROM students WHERE id = ?", (student_id,))
+            student_row = self.cursor.fetchone()
+            if not student_row:
+                print(f"Студента з ID {student_id} не знайдено.")
+                return None
+
+            student_data = {
+                "id": student_row[0],
+                "pib": student_row[1],
+                "group": student_row[2],
+                "dob": student_row[3],
+                "address": student_row[4],
+                "grades": []
+            }
+
+            # Отримуємо оцінки студента
+            self.cursor.execute("SELECT subject, real_grade, desired_grade FROM grades WHERE student_id = ?",
+                                (student_id,))
+            grades_rows = self.cursor.fetchall()
+
+            for row in grades_rows:
+                student_data["grades"].append({
+                    "subject": row[0],
+                    "real_grade": row[1],
+                    "desired_grade": row[2]
+                })
+
+            return student_data
+        except sqlite3.Error as e:
+            print(f"Помилка отримання даних: {e}")
+            return None
