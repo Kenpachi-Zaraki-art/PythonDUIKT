@@ -48,3 +48,34 @@ class DatabaseManager:
         """)
         self.conn.commit()
         print("Таблиці 'students' та 'grades' перевірено/створено.")
+
+    def add_student(self, pib: str, group: str, dob: str = None, address: str = None) -> int:
+        """
+        Метод для запису даних студента в БД.
+        Повертає ID створеного студента.
+        """
+        try:
+            self.cursor.execute("""
+            INSERT INTO students (pib, group_number, dob, address)
+            VALUES (?, ?, ?, ?)
+            """, (pib, group, dob, address))
+            self.conn.commit()
+            print(f"Додано студента: {pib}")
+            return self.cursor.lastrowid
+        except sqlite3.Error as e:
+            print(f"Помилка додавання студента: {e}")
+            return -1
+
+    def add_grade(self, student_id: int, subject: str, real_grade: int, desired_grade: int):
+        """
+        Метод для запису предметів та балів студента.
+        """
+        try:
+            self.cursor.execute("""
+            INSERT INTO grades (student_id, subject, real_grade, desired_grade)
+            VALUES (?, ?, ?, ?)
+            """, (student_id, subject, real_grade, desired_grade))
+            self.conn.commit()
+            print(f"Додано оцінку для student_id {student_id}: {subject}")
+        except sqlite3.Error as e:
+            print(f"Помилка додавання оцінки: {e}")
