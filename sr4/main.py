@@ -78,3 +78,20 @@ if data_from_db:
     desired_perf = DesiredPerformance(subjects, desired_grades, desired_avg_input=91.5)
     print(f"Бажані бали: {desired_perf.grades}")
     print(f"Бажаний середній бал (введений): {desired_perf.average_grade()}")
+    print("\n--- 3. Демонстрація ОНОВЛЕННЯ (Update) ---")
+
+    # Оновлюємо дані студента
+    db.update_student(student_id, new_pib="Петренко Петро Петрович", new_group="КН-22")
+
+    # Читаємо оновлені дані
+    updated_data = db.get_student_data_by_id(student_id)
+    print(f"Оновлені дані: ПІБ - {updated_data['pib']}, Група - {updated_data['group']}")
+
+    print("\n--- 4. Демонстрація ВИДАЛЕННЯ (Delete) ---")
+
+    # Видаляємо студента
+    db.delete_student(student_id)
+
+    # Спроба прочитати видалені дані
+    deleted_data = db.get_student_data_by_id(student_id)
+    print(f"Результат пошуку виданого студента: {deleted_data}")
