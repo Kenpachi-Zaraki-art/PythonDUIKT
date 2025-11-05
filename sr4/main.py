@@ -95,3 +95,8 @@ if data_from_db:
     # Спроба прочитати видалені дані
     deleted_data = db.get_student_data_by_id(student_id)
     print(f"Результат пошуку виданого студента: {deleted_data}")
+    # Закриваємо з'єднання
+    db.close()
+
+if __name__ == "__main__":
+    demonstrate_crud()
