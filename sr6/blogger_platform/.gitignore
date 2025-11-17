@@ -1,0 +1,18 @@
+# Віртуальне середовище
+venv/
+.venv/
+
+# Файли IDE (Pycharm, VSCode)
+.idea/
+.vscode/
+
+# База даних
+db.sqlite3
+*.sqlite3
+
+# Кеш Python
+__pycache__/
+*.pyc
+
+# Файли середовища
+.env
